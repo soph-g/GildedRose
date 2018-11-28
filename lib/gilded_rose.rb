@@ -3,6 +3,7 @@ require_relative './sulfuras'
 require_relative './general_item'
 require_relative './backstage'
 require_relative './aged_brie'
+require_relative './conjured'
 
 class GildedRose
 
@@ -12,7 +13,7 @@ class GildedRose
     "Aged Brie" => AgedBrie,
     "+5 Dexterity Vest" => GeneralItem,
     "Elixir of the Mongoose" => GeneralItem,
-    "Conjured Mana Cake" => GeneralItem,
+    "Conjured Mana Cake" => Conjured,
     "Sulfuras, Hand of Ragnaros" => Sulfuras,
     "Backstage passes to a TAFKAL80ETC concert" => Backstage,
   }

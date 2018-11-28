@@ -251,7 +251,7 @@ describe GildedRose do
       end
     end
 
-    xdescribe "Conjured Mana Cake" do
+    describe "Conjured Mana Cake" do
       describe "sell_in > 0 && quality > 0" do
         it "reduces the sell_in by 1" do
           subject.update_quality
