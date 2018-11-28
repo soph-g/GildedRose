@@ -276,6 +276,19 @@ describe GildedRose do
           expect(subject.items[5].quality).to eq 0
         end
       end
+
+      describe "sell_in < 0 && quality > 0" do
+        before do
+          6.times { subject.update_quality }
+        end
+        it "reduces the sell_in by 1" do
+          expect(subject.items[5].sell_in).to eq -3
+        end
+
+        it "decreases the quality by 2" do
+          expect(subject.items[5].quality).to eq 0
+        end
+      end
     end
   end
 end
