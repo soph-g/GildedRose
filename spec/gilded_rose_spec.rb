@@ -182,7 +182,7 @@ describe GildedRose do
         end
       end
 
-      describe "sell_in > 0 && quality < 50" do
+      describe "5 > sell_in > 0 && quality < 50" do
         before do
           12.times { subject.update_quality }
         end
