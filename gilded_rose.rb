@@ -19,7 +19,7 @@ class GildedRose
       if (item.name == "Sulfuras, Hand of Ragnaros")
         next
       end
-      item.sell_in = item.sell_in - 1 if item.name == "Aged Brie"
+      item.sell_in = item.sell_in - 1
       if (item.name == "Aged Brie")
         if (item.quality < 50)
           item.quality = item.quality + 1
@@ -27,32 +27,25 @@ class GildedRose
             item.quality = item.quality + 1
           end
         end
-      elsif (item.name == "Backstage passes to a TAFKAL80ETC concert" && item.quality < 50)
-        item.quality = item.quality + 1
-        if (item.sell_in < 6 && item.quality < 50)
+      elsif (item.name == "Backstage passes to a TAFKAL80ETC concert")
+        if (item.quality <= 50)
           item.quality = item.quality + 1
+          if (item.sell_in < 5 && item.quality < 50)
+            item.quality = item.quality + 1
+          end
+          if (item.sell_in < 10 && item.quality < 50)
+            item.quality = item.quality + 1
+          end
+          if (item.sell_in < 0)
+            item.quality = item.quality - item.quality
+          end
         end
-        if (item.sell_in < 11 && item.quality < 50)
-          item.quality = item.quality + 1
-        end
-      else
-        if (item.quality > 0)
-          item.quality = item.quality - 1
-        end
-      end
-      item.sell_in = item.sell_in - 1 if item.name != "Aged Brie"
-      if (item.sell_in < 0)
-        if (item.name == "Backstage passes to a TAFKAL80ETC concert")
-          item.quality = item.quality - item.quality
-        # elsif (item.name == "Aged Brie")
-        #   if (item.quality < 50)
-        #     item.quality = item.quality + 1
-        #   end
-        elsif (item.name != "Aged Brie" && item.quality > 0)
+      elsif (item.quality > 0)
+        item.quality = item.quality - 1
+        if (item.sell_in < 0 && item.quality > 0)
           item.quality = item.quality - 1
         end
       end
     end
   end
-
 end
