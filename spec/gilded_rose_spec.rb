@@ -207,6 +207,19 @@ describe GildedRose do
           expect(subject.items[4].quality).to eq 0
         end
       end
+
+      describe "sell_in < 0 && quality == 0" do
+        before do
+          20.times { subject.update_quality }
+        end
+        it "reduces the sell_in by 1" do
+          expect(subject.items[4].sell_in).to eq -5
+        end
+
+        it "increases the quality by 2" do
+          expect(subject.items[4].quality).to eq 0
+        end
+      end
     end
 
     xdescribe "Conjured Mana Cake" do

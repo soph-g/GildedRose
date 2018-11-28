@@ -19,40 +19,29 @@ class GildedRose
     @items.each do |item|
       if (item.name == "Sulfuras, Hand of Ragnaros")
         next
-      elsif (item.name == "Aged Brie")
-        if (under_quality_limit?(item))
+      end
+      item.sell_in -= 1;
+      if (item.sell_in < 0 && item.quality > 0)
+        decrease_quality(item, 1)
+      end
+      if (item.name == "Aged Brie" && under_quality_limit?(item))
+        increase_quality(item, 1)
+        if (item.sell_in <= 0)
           increase_quality(item, 1)
         end
       elsif (item.name == "Backstage passes to a TAFKAL80ETC concert")
         increase_quality(item, 1)
-        if (under_quality_limit?(item))
-          if (item.sell_in < 11)
+        if (under_quality_limit?(item) && item.sell_in < 10)
+          increase_quality(item, 1)
+          if (item.sell_in < 5)
             increase_quality(item, 1)
           end
-          if (item.sell_in < 6)
-            increase_quality(item, 1)
-          end
-        end
-      else
-        if (item.quality > 0)
-          decrease_quality(item, 1)
-        end
-      end
-      item.sell_in = item.sell_in - 1;
-      if (item.sell_in < 0)
-        if (item.name != "Aged Brie")
-          if (item.name != "Backstage passes to a TAFKAL80ETC concert")
-            if (item.quality > 0)
-              decrease_quality(item, 1)
-            end
-          else
+          if (item.sell_in <= 0)
             decrease_quality(item, item.quality)
           end
-        else
-          if (under_quality_limit?(item))
-            increase_quality(item, 1)
-          end
         end
+      elsif (item.quality > 0)
+        decrease_quality(item, 1)
       end
     end
   end
