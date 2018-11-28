@@ -25,16 +25,14 @@ class GildedRose
           end
         end
       else
-        if (item.quality < 50)
+        if (under_quality_limit?(item))
           increase_quality(item, 1)
           if (item.name == "Backstage passes to a TAFKAL80ETC concert")
-            if (item.sell_in < 11)
-              if (item.quality < 50)
+            if (under_quality_limit?(item))
+              if (item.sell_in < 11)
                 increase_quality(item, 1)
               end
-            end
-            if (item.sell_in < 6)
-              if (item.quality < 50)
+              if (item.sell_in < 6)
                 increase_quality(item, 1)
               end
             end
@@ -56,7 +54,7 @@ class GildedRose
             decrease_quality(item, item.quality)
           end
         else
-          if (item.quality < 50)
+          if (under_quality_limit?(item))
             increase_quality(item, 1)
           end
         end
@@ -74,4 +72,7 @@ class GildedRose
     item.quality -= amount
   end
 
+  def under_quality_limit?(item)
+    item.quality < 50
+  end
 end
