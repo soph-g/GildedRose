@@ -16,41 +16,51 @@ class GildedRose
 
   def update_quality
 
-    @items.each do |item|
-      if (item.name == "Sulfuras, Hand of Ragnaros")
-        next
-      end
-      item.sell_in -= 1;
-      if (item.sell_in < 0 && item.quality > 0)
-        change_quality(item, -1)
-      end
-      if (item.name == "Aged Brie" && under_quality_limit?(item))
-        change_quality(item, 1)
-        if (item.sell_in < 1)
-          change_quality(item, 1)
+    for i in 0..(@items.size-1)
+      if (@items[i].name != "Aged Brie" && @items[i].name != "Backstage passes to a TAFKAL80ETC concert")
+        if (@items[i].quality > 0)
+          if (@items[i].name != "Sulfuras, Hand of Ragnaros")
+            @items[i].quality = @items[i].quality - 1
+          end
         end
-      elsif (item.name == "Backstage passes to a TAFKAL80ETC concert")
-        change_quality(item, 1)
-        if (item.sell_in < 1)
-          change_quality(item, -item.quality)
-        elsif (under_quality_limit?(item) && item.sell_in < 5)
-          change_quality(item, 2)
-        elsif (under_quality_limit?(item) && item.sell_in < 10)
-          change_quality(item, 1)
+      else
+        if (@items[i].quality < 50)
+          @items[i].quality = @items[i].quality + 1
+          if (@items[i].name == "Backstage passes to a TAFKAL80ETC concert")
+            if (@items[i].sell_in < 11)
+              if (@items[i].quality < 50)
+                @items[i].quality = @items[i].quality + 1
+              end
+            end
+            if (@items[i].sell_in < 6)
+              if (@items[i].quality < 50)
+                @items[i].quality = @items[i].quality + 1
+              end
+            end
+          end
         end
-      elsif (item.quality > 0)
-        change_quality(item, -1)
+      end
+      if (@items[i].name != "Sulfuras, Hand of Ragnaros")
+        @items[i].sell_in = @items[i].sell_in - 1;
+      end
+      if (@items[i].sell_in < 0)
+        if (@items[i].name != "Aged Brie")
+          if (@items[i].name != "Backstage passes to a TAFKAL80ETC concert")
+            if (@items[i].quality > 0)
+              if (@items[i].name != "Sulfuras, Hand of Ragnaros")
+                @items[i].quality = @items[i].quality - 1
+              end
+            end
+          else
+            @items[i].quality = @items[i].quality - @items[i].quality
+          end
+        else
+          if (@items[i].quality < 50)
+            @items[i].quality = @items[i].quality + 1
+          end
+        end
       end
     end
   end
 
-  private
-
-  def change_quality(item, amount)
-    item.quality += amount
-  end
-
-  def under_quality_limit?(item)
-    item.quality < 50
-  end
 end
