@@ -8,14 +8,14 @@ class GildedRose
 
   attr_reader :items
 
-  ITEM_HANDERS = {
+  ITEM_HANDLERS = {
     "Aged Brie" => AgedBrie,
     "+5 Dexterity Vest" => GeneralItem,
     "Elixir of the Mongoose" => GeneralItem,
     "Conjured Mana Cake" => GeneralItem,
     "Sulfuras, Hand of Ragnaros" => Sulfuras,
     "Backstage passes to a TAFKAL80ETC concert" => Backstage,
-   }
+  }
 
   def initialize
     @items = []
@@ -29,8 +29,8 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      item_handler = ITEM_HANDERS[item.name].new(item)
-      item_handler.decrease_sell_in
+      item_handler = ITEM_HANDLERS[item.name].new(item)
+      item_handler.update_sell_in
       item_handler.update_quality
     end
   end

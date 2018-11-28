@@ -4,7 +4,7 @@ class AgedBrie
     @item = item
   end
 
-  def decrease_sell_in
+  def update_sell_in
     @item.sell_in -= 1
   end
 

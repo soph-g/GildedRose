@@ -6,7 +6,7 @@ class Sulfuras
     nil
   end
 
-  def decrease_sell_in
+  def update_sell_in
     nil
   end
 end
