@@ -9,12 +9,13 @@ class AgedBrie
   end
 
   def update_quality
-    if (@item.quality < 50)
-      @item.quality += 1
-    end
+    increase_quality
+    increase_quality if (@item.sell_in < 0)
+  end
 
-    if (@item.sell_in < 0 && @item.quality < 50)
-      @item.quality += 1
-    end
+  private
+
+  def increase_quality
+    @item.quality += 1 if (@item.quality < 50)
   end
 end

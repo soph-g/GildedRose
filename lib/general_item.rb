@@ -9,12 +9,14 @@ class GeneralItem
   end
 
   def update_quality
-    if (@item.quality > 0)
-      @item.quality -= 1
-    end
-    if (@item.sell_in < 0 && @item.quality > 0)
-      @item.quality -= 1
-    end
+    reduce_quality
+    reduce_quality if (@item.sell_in < 0)
+  end
+
+  private
+
+  def reduce_quality
+    @item.quality -= 1 if (@item.quality > 0)
   end
 
 end
