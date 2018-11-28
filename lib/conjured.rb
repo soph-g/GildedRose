@@ -9,10 +9,16 @@ class Conjured
   end
 
   def update_quality
-    if (@item.quality > 0)
-      @item.quality -= 2
+    reduce_quality
+    if (@item.sell_in < 0)
+      reduce_quality
     end
-    if (@item.sell_in < 0 && @item.quality > 0)
+  end
+
+  private
+
+  def reduce_quality
+    if (@item.quality > 0)
       @item.quality -= 2
     end
   end
