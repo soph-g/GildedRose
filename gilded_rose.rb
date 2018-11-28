@@ -20,7 +20,7 @@ class GildedRose
       if (@items[i].name != "Aged Brie" && @items[i].name != "Backstage passes to a TAFKAL80ETC concert")
         if (@items[i].quality > 0)
           if (@items[i].name != "Sulfuras, Hand of Ragnaros")
-            @items[i].quality = @items[i].quality - 1
+            decrease_quality(@items[i], 1)
           end
         end
       else
@@ -48,11 +48,11 @@ class GildedRose
           if (@items[i].name != "Backstage passes to a TAFKAL80ETC concert")
             if (@items[i].quality > 0)
               if (@items[i].name != "Sulfuras, Hand of Ragnaros")
-                @items[i].quality = @items[i].quality - 1
+                decrease_quality(@items[i], 1)
               end
             end
           else
-            @items[i].quality = @items[i].quality - @items[i].quality
+            decrease_quality(@items[i], @items[i].quality)
           end
         else
           if (@items[i].quality < 50)
@@ -67,6 +67,10 @@ class GildedRose
 
   def increase_quality(item, amount)
     item.quality += amount
+  end
+
+  def decrease_quality(item, amount)
+    item.quality -= amount
   end
 
 end
