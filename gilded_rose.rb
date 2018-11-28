@@ -28,16 +28,15 @@ class GildedRose
           end
         end
       elsif (item.name == "Backstage passes to a TAFKAL80ETC concert")
-        if (item.quality <= 50)
+        if (item.sell_in < 0)
+          item.quality = item.quality - item.quality
+        elsif (item.quality < 50)
           item.quality = item.quality + 1
           if (item.sell_in < 5 && item.quality < 50)
             item.quality = item.quality + 1
           end
           if (item.sell_in < 10 && item.quality < 50)
             item.quality = item.quality + 1
-          end
-          if (item.sell_in < 0)
-            item.quality = item.quality - item.quality
           end
         end
       elsif (item.quality > 0)
