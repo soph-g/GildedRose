@@ -18,44 +18,40 @@ class GildedRose
 
     for i in 0..(@items.size-1)
       item = items[i]
-      if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert")
-        if (item.quality > 0)
-          if (item.name != "Sulfuras, Hand of Ragnaros")
-            decrease_quality(item, 1)
-          end
-        end
-      else
-        if (under_quality_limit?(item))
-          increase_quality(item, 1)
-          if (item.name == "Backstage passes to a TAFKAL80ETC concert")
-            if (under_quality_limit?(item))
-              if (item.sell_in < 11)
-                increase_quality(item, 1)
-              end
-              if (item.sell_in < 6)
-                increase_quality(item, 1)
-              end
-            end
-          end
-        end
-      end
       if (item.name != "Sulfuras, Hand of Ragnaros")
-        item.sell_in = item.sell_in - 1;
-      end
-      if (item.sell_in < 0)
-        if (item.name != "Aged Brie")
-          if (item.name != "Backstage passes to a TAFKAL80ETC concert")
-            if (item.quality > 0)
-              if (item.name != "Sulfuras, Hand of Ragnaros")
-                decrease_quality(item, 1)
-              end
-            end
-          else
-            decrease_quality(item, item.quality)
+        if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert")
+          if (item.quality > 0)
+            decrease_quality(item, 1)
           end
         else
           if (under_quality_limit?(item))
             increase_quality(item, 1)
+            if (item.name == "Backstage passes to a TAFKAL80ETC concert")
+              if (under_quality_limit?(item))
+                if (item.sell_in < 11)
+                  increase_quality(item, 1)
+                end
+                if (item.sell_in < 6)
+                  increase_quality(item, 1)
+                end
+              end
+            end
+          end
+        end
+        item.sell_in = item.sell_in - 1;
+        if (item.sell_in < 0)
+          if (item.name != "Aged Brie")
+            if (item.name != "Backstage passes to a TAFKAL80ETC concert")
+              if (item.quality > 0)
+                decrease_quality(item, 1)
+              end
+            else
+              decrease_quality(item, item.quality)
+            end
+          else
+            if (under_quality_limit?(item))
+              increase_quality(item, 1)
+            end
           end
         end
       end
