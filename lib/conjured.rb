@@ -16,6 +16,7 @@ class Conjured
   private
 
   def reduce_quality
-    @item.quality -= 2 if (@item.quality > 0)
+    @item.quality -= 1 if (@item.quality > 0)
+    @item.quality -= 1 if (@item.quality > 0)
   end
 end
