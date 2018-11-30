@@ -26,13 +26,19 @@ class GildedRose
     @items << Item.new("Sulfuras, Hand of Ragnaros", 0, 80)
     @items << Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     @items << Item.new("Conjured Mana Cake", 3, 6)
+    @handlers = create_item_handlers
   end
 
   def update_quality
-    @items.each do |item|
-      item_handler = ITEM_HANDLERS[item.name].new(item)
+    @handlers.each do |item_handler|
       item_handler.update_sell_in
       item_handler.update_quality
     end
+  end
+
+  private
+
+  def create_item_handlers
+    @items.map { |item| ITEM_HANDLERS[item.name].new(item) }
   end
 end
